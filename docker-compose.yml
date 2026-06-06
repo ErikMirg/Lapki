@@ -1,0 +1,7 @@
+services:
+  lapki:
+    build: .
+    container_name: lapki
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

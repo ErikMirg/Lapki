@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Ветклиника «Здоровая лапка» | Полный прайс из Excel</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"&gt;
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap&quot; rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f7ff;
+            color: #1e2a3e;
+            line-height: 1.5;
+        }
+
+        :root {
+            --primary-blue: #0a5c8e;
+            --primary-dark: #064663;
+            --accent-blue: #2196f3;
+            --light-blue: #e6f4ff;
+            --gray-light: #f9fafc;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+            color: white;
+            padding: 2rem 0;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 6px;
+        }
+
+        .contacts-quick {
+            background: rgba(255,255,255,0.15);
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        .contacts-quick i {
+            margin-right: 8px;
+        }
+
+        .contacts-quick a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(255,255,255,0.5);
+        }
+
+        section {
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+            border-left: 6px solid var(--accent-blue);
+            padding-left: 1rem;
+        }
+
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: space-between;
+        }
+
+        .info-card {
+            flex: 1;
+            min-width: 200px;
+            background: var(--light-blue);
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        /* Вкладки услуг */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2edf7;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4b5563;
+            cursor: pointer;
+            border-radius: 40px;
+			transition: all 0.2s;
+        }
+
+        .tab-btn i {
+            margin-right: 8px;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fade 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(5px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .service-item {
+            background: #f9fafc;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            border-left: 4px solid var(--accent-blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .service-name {
+            font-weight: 500;
+        }
+
+        .service-price {
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .download-excel {
+            background: #e8f0fe;
+            border-radius: 1.5rem;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .btn-excel {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-excel:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .social-btn {
+            background: var(--light-blue);
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            text-decoration: none;
+            color: var(--primary-dark);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-btn:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        footer {
+            background: #e0edf9;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 1.5rem 1.5rem 0 0;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+        }
+
+        .pet-banner {
+            background: url('https://images.pexels.com/photos/4588055/pexels-photo-4588055.jpeg?auto=compress&cs=tinysrgb&w=1200&h=300&fit=crop') center/cover no-repeat;
+            height: 180px;
+            border-radius: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        max-width: 700px {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .tabs {
+                justify-content: center;
+            }
+            .service-item {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <h1><i class="fas fa-paw"></i> Здоровая лапка</h1>
+                <p>Ветеринарная клиника в Москве</p>
+            </div>
+            <div class="contacts-quick">
+                <i class="fas fa-phone-alt"></i> <a href="tel:+74993421256">+7 499 342-12-56</a>
+            </div>
+        </div>
+        <div
+		style="text-align: center; margin-top: 1rem;">
+            <i class="fas fa-dog" style="font-size: 2rem; margin: 0 0.5rem;"></i>
+            <i class="fas fa-cat" style="font-size: 2rem; margin: 0 0.5rem;"></i>
+            <i class="fas fa-dove" style="font-size: 2rem; margin: 0 0.5rem;"></i>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <!-- Баннер с картинкой -->
+    <div class="pet-banner"></div>
+
+    <!-- Контактная информация -->
+    <section>
+        <h2><i class="fas fa-info-circle"></i> О клинике</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Адрес</h3>
+                <span>г. Москва, проспект Маршала Жукова, 35</span>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-phone"></i>
+                <h3>Телефон</h3>
+                <a href="tel:+74993421256">+7 499 342-12-56</a>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <a href="mailto:clients@zdorovaya-lapka.ru">clients@zdorovaya-lapka.ru</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги из Excel-файла (категории) -->
+    <section>
+        <h2><i class="fas fa-stethoscope"></i> Наши услуги (из прайс-листа)</h2>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="diagnostics"><i class="fas fa-x-ray"></i> Диагностика</button>
+            <button class="tab-btn" data-tab="laboratory"><i class="fas fa-microscope"></i> Лаборатория</button>
+            <button class="tab-btn" data-tab="surgery"><i class="fas fa-scalpel"></i> Хирургия / Стоматология</button>
+            <button class="tab-btn" data-tab="therapy"><i class="fas fa-notes-medical"></i> Терапия / Приёмы</button>
+            <button class="tab-btn" data-tab="dispensary"><i class="fas fa-heartbeat"></i> Диспансеризация</button>
+        </div>
+
+        <!-- Диагностика (Рентген, УЗИ, ЭКГ) -->
+        <div id="diagnostics" class="tab-content active">
+            <div class="service-list">
+                <div class="service-item"><span class="service-name">Рентген в 1 проекции</span><span class="service-price">1700 ₽</span></div>
+                <div class="service-item"><span class="service-name">Рентген в 2 проекциях</span><span class="service-price">2950 ₽</span></div>
+                <div class="service-item"><span class="service-name">Рентген черепа (3 снимка)</span><span class="service-price">3800 ₽</span></div>
+                <div class="service-item"><span class="service-name">УЗИ брюшной полости детализированное</span><span class="service-price">4500 ₽</span></div>
+                <div class="service-item"><span class="service-name">УЗИ грудной полости</span><span class="service-price">1900 ₽</span></div>
+                <div class="service-item"><span class="service-name">Эхокардиограмма (ЭХОКГ)</span><span class="service-price">3850 ₽</span></div>
+                <div class="service-item"><span class="service-name">Электрокардиограмма (ЭКГ)</span><span class="service-price">1550 ₽</span></div>
+                <div class="service-item"><span class="service-name">Холтеровское мониторирование (установка+расшифровка)</span><span class="service-price">7500 ₽</span></div>
+                <div class="service-item"><span class="service-name">Цистоскопия</span><span class="service-price">6200 ₽</span></div>
+                <div class="service-item"><span class="service-name">Гастроскопия</span><span class="service-price">6200 ₽</span></div>
+            </div>
+        </div>
+
+        <!-- Лабораторная диагностика -->
+        <div id="laboratory" class="tab-content">
+            <div class="service-list">
+                <div class="service-item"><span class="service-name">Общий клинический анализ крови</span><span class="service-price">2000 ₽</span></div>
+                <div class="service-item"><span class="service-name">Биохимия (1показатель)</span><span class="service-price">210 ₽</span></div>
+                <div class="service-item"><span class="service-name">Коагулограмма</span><span class="service-price">2500 ₽</span></div>
+                <div class="service-item"><span class="service-name">Общий анализ мочи</span><span class="service-price">780 ₽</span></div>
+                <div class="service-item"><span class="service-name">Гистологическое исследование (до 6 блоков)</span><span class="service-price">4700 ₽</span></div>
+                <div class="service-item"><span class="service-name">ПЦР на инфекции (кошки/собаки)</span><span class="service-price">1350 ₽</span></div>
+                <div class="service-item"><span class="service-name">Посев мочи на флору + антибиотикограмма</span><span class="service-price">1950 ₽</span></div>
+                <div class="service-item"><span class="service-name">С-реактивный белок (собаки)</span><span class="service-price">2400 ₽</span></div>
+                <div class="service-item"><span class="service-name">Т4 общий (гормон)</span><span class="service-price">1700 ₽</span></div>
+            </div>
+        </div>
+
+        <!-- Хирургия и стоматология -->
+        <div id="surgery" class="tab-content">
+            <div class="service-list">
+                <div class="service-item"><span class="service-name">Кастрация кота (риск 1, пакет)</span><span class="service-price">11000 ₽</span></div>
+                <div class="service-item"><span class="service-name">Стерилизация кошки (риск 1, пакет)</span><span class="service-price">11000 ₽</span></div>
+                <div class="service-item"><span class="service-name">Остеосинтез при переломе (до 10 кг)</span><span class="service-price">21000 ₽</span></div>
+                <div class="service-item"><span class="service-name">Удаление зубного камня (1 зуб, 3 степень)</span><span class="service-price">250 ₽</span></div>
+                <div class="service-item"><span class="service-name">Эндодонтическое лечение клыка (собака до 5 кг)</span><span class="service-price">6300 ₽</span></div>
+                <div class="service-item"><span class="service-name">Резекция новообразования кожи (2-4 см)</span><span class="service-price">6200 ₽</span></div>
+                <div class="service-item"><span class="service-name">Кесарево сечение (собака до 10 кг)</span><span class="service-price">21550 ₽</span></div>
+                <div class="service-item"><span class="service-name">Анестезиологическое пособие (1 степень риска)</span><span class="service-price">5000 ₽</span></div>
+            </div>
+        </div>
+
+        <!-- Терапия и приёмы -->
+        <div id="therapy" class="tab-content">
+            <div class="service-list">
+                <div class="service-item"><span class="service-name">Первичный приём терапевта</span><span class="service-price">3150 ₽</span></div>
+                <div class="service-item"><span class="service-name">Приём кардиолога (первичный)</span><span class="service-price">3700 ₽</span></div>
+                <div class="service-item"><span class="service-name">Вакцинация импортной вакциной (полный комплекс)</span><span class="service-price">4500 ₽</span></div>
+                <div class="service-item"><span class="service-name">Чипирование стандартным чипом + регистрация</span><span class="service-price">2450 ₽</span></div>
+                <div class="service-item"><span class="service-name">Капельница (в/в введение препаратов)</span><span class="service-price">2100 ₽</span></div>
+                <div class="service-item"><span class="service-name">УЗИ-контроль + пункционная биопсия</span><span class="service-price">5750 ₽</span></div>
+                <div class="service-item"><span class="service-name">Содержание в стационаре (день)</span><span class="service-price">510 ₽</span></div>
+                <div class="service-item"><span class="service-name">Консультация диетолога (составление рациона BARF)</span><span class="service-price">4750 ₽</span></div>
+            </div>
+        </div>
+		<!-- Диспансеризация -->
+        <div id="dispensary" class="tab-content">
+            <div class="service-list">
+                <div class="service-item"><span class="service-name">Пакет диспансеризация (кошки/собаки) – приём терапевта, ОКА, биохимия, рентген грудной клетки, УЗИ брюшной полости, ЭХОКГ, ЭКГ, тонометрия</span><span class="service-price">16900 ₽</span></div>
+                <div class="service-item"><span class="service-name">* Отдельно: рентген грудной клетки (пакет)</span><span class="service-price">2300 ₽</span></div>
+                <div class="service-item"><span class="service-name">* Отдельно: УЗИ брюшной полости (пакет)</span><span class="service-price">2300 ₽</span></div>
+                <div class="service-item"><span class="service-name">* Отдельно: ЭХОКГ (пакет)</span><span class="service-price">2300 ₽</span></div>
+                <div class="service-item"><span class="service-name">* Отдельно: ЭКГ (пакет)</span><span class="service-price">2300 ₽</span></div>
+            </div>
+        </div>
+
+        <!-- Блок скачивания полного Excel-файла -->
+        <div class="download-excel">
+            <p style="margin-bottom: 10px;"><i class="fas fa-file-excel"></i> Полный прайс-лист со всеми услугами (5 листов, более 500 позиций) находится в исходном Excel-файле:</p>
+            <a href="Список услуг.xlsx" download class="btn-excel"><i class="fas fa-download"></i> Скачать прайс-лист (Excel)</a>
+            <p style="font-size: 0.8rem; margin-top: 10px;">* Если скачивание не начинается, убедитесь, что файл «Список услуг.xlsx» лежит в той же папке, что и эта страница.</p>
+        </div>
+    </section>
+
+    <!-- Соцсети -->
+    <section>
+        <h2><i class="fas fa-share-alt"></i> Мы в соцсетях</h2>
+        <div class="social-links">
+            <a href="https://vk.com/zdoravaya_lapka&quot; target="_blank" class="social-btn"><i class="fab fa-vk"></i> VKontakte</a>
+            <a href="https://t.me/+WqKcasdRe-VQyYasasd&quot; target="_blank" class="social-btn"><i class="fab fa-telegram"></i> Telegram</a>
+        </div>
+        <div style="margin-top: 1.5rem;">
+            <i class="fas fa-clock"></i> Режим работы: ежедневно с 09:00 до 21:00, без выходных.
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 Ветклиника «Здоровая лапка» — забота о ваших питомцах. <i class="fas fa-paw"></i></p>
+    <p>Email: <a href="mailto:clients@zdorovaya-lapka.ru" style="color: #0a5c8e;">clients@zdorovaya-lapka.ru</a> | Телефон: <a href="tel:+74993421256" style="color: #0a5c8e;">+7 499 342-12-56</a></p>
+</footer>
+
+<script>
+    // Переключение вкладок
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            // деактивировать все кнопки и контенты
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>
