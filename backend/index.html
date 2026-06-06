@@ -659,6 +659,115 @@
 
 </section>
 
+<section class="container section">
+
+<h2>Запись на приём и оплата</h2>
+
+<div class="booking-card">
+
+    <label for="serviceSelect">
+        Выберите услугу:
+    </label>
+
+    <select id="serviceSelect">
+
+        <option value="Первичный приём терапевта|3150">
+            Первичный приём терапевта — 3150 ₽
+        </option>
+
+        <option value="Повторный приём терапевта|3150">
+            Повторный приём терапевта — 3150 ₽
+        </option>
+
+        <option value="Первичный приём кардиолога|3700">
+            Первичный приём кардиолога — 3700 ₽
+        </option>
+
+        <option value="Ультразвуковая чистка зубов|3500">
+            Ультразвуковая чистка зубов — 3500 ₽
+        </option>
+
+    </select>
+
+    <div class="booking-buttons">
+
+        <button onclick="createOrder()">
+            Создать заказ
+        </button>
+
+        <button onclick="payOrder()">
+            Оплатить
+        </button>
+
+    </div>
+
+    <p id="paymentStatus"></p>
+
+</div>
+
+
+</section>
+
+<script>
+
+let currentOrderId = null;
+
+async function createOrder() {
+
+    const data =
+        document.getElementById("serviceSelect")
+        .value
+        .split("|");
+
+    const serviceName = data[0];
+    const price = parseInt(data[1]);
+
+    const response = await fetch("/orders", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            service_name: serviceName,
+            price: price
+        })
+    });
+
+    const result = await response.json();
+
+    currentOrderId = result.id;
+
+    document.getElementById("paymentStatus")
+        .innerText =
+        "Заказ №" + result.id + " успешно создан";
+}
+
+async function payOrder() {
+
+    if (!currentOrderId) {
+
+        alert("Сначала создайте заказ");
+
+        return;
+    }
+
+    const response = await fetch(
+        "/payment/create/" + currentOrderId,
+        {
+            method: "POST"
+        }
+    );
+
+    const result = await response.json();
+
+    window.location.href =
+        result.payment_url;
+}
+
+</script>
+
+
+
 <section id="contacts" class="container section">
 
     <h2>Контакты</h2>
