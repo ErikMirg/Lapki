@@ -41,6 +41,14 @@ def download_price():
         filename="Список_услуг.xlsx"
     )
 
+@app.get("/robots.txt", include_in_schema=False)
+def robots():
+    return FileResponse("robots.txt")
+
+
+@app.get("/sitemap.xml", include_in_schema=False)
+def sitemap():
+    return FileResponse("sitemap.xml")
 
 @app.post("/orders")
 def create_order(order: OrderCreate):
