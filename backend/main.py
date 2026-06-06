@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from sqlalchemy.orm import Session
 
 from fastapi.staticfiles import StaticFiles
@@ -19,6 +19,31 @@ app = FastAPI(
     title="Здоровая лапка",
     version="1.0"
 )
+
+@app.middleware("http")
+async def security_headers(request: Request, call_next):
+
+    response = await call_next(request)
+
+    response.headers["Strict-Transport-Security"] = \
+        "max-age=31536000; includeSubDomains"
+
+    response.headers["X-Content-Type-Options"] = \
+        "nosniff"
+
+    response.headers["X-Frame-Options"] = \
+        "SAMEORIGIN"
+
+    response.headers["Referrer-Policy"] = \
+        "strict-origin-when-cross-origin"
+
+    response.headers["Permissions-Policy"] = \
+        "camera=(), microphone=(), geolocation=()"
+
+    response.headers["Content-Security-Policy"] = \
+        "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';"
+
+    return response
 
 app.mount(
     "/static",
