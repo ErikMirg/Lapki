@@ -34,6 +34,14 @@ def root():
     return FileResponse("index.html")
 
 
+@app.get("/price")
+def download_price():
+    return FileResponse(
+        "Список услуг.xlsx",
+        filename="Список_услуг.xlsx"
+    )
+
+
 @app.post("/orders")
 def create_order(order: OrderCreate):
 
