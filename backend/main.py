@@ -219,11 +219,16 @@ def create_order_payment(order_id: int):
 
     db.commit()
 
+    order_id_value = order.id
+    payment_id_value = payment.id
+    payment_url_value = (
+        payment.confirmation.confirmation_url
+    )
+
     db.close()
 
     return {
-        "order_id": order.id,
-        "payment_id": payment.id,
-        "payment_url":
-            payment.confirmation.confirmation_url
+        "order_id": order_id_value,
+        "payment_id": payment_id_value,
+        "payment_url": payment_url_value
     }

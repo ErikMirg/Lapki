@@ -417,3 +417,58 @@ margin-top: 20px;
 font-weight: 600;
 color: #2e7d32;
 }
+
+.booking-card {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.booking-card label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.booking-card select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.booking-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.booking-buttons button {
+    border: none;
+    cursor: pointer;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.booking-buttons button:first-child {
+    background: #4caf50;
+    color: white;
+}
+
+.booking-buttons button:last-child {
+    background: #2196f3;
+    color: white;
+}
+
+#paymentStatus {
+    margin-top: 20px;
+    font-weight: 600;
+    color: #2e7d32;
+}
